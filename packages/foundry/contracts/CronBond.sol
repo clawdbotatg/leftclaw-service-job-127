@@ -130,6 +130,7 @@ contract CronBond is Ownable2Step, Pausable, ReentrancyGuard {
     // -----------------------------------------------------------------
 
     constructor(address usdc, address feeReceiver, address initialOwner) Ownable(initialOwner) {
+        if (usdc == address(0) || feeReceiver == address(0)) revert ZeroTarget();
         USDC = IERC20(usdc);
         PROTOCOL_FEE_RECEIVER = feeReceiver;
     }
@@ -145,7 +146,7 @@ contract CronBond is Ownable2Step, Pausable, ReentrancyGuard {
         uint256 bondAmount,
         uint32 maxGas
     ) external whenNotPaused returns (uint256) {
-        if (target == address(this)) revert BannedTarget();
+        if (target == address(this) || target == address(USDC)) revert BannedTarget();
         if (target == address(0)) revert ZeroTarget();
         if (callData.length > MAX_CALLDATA_SIZE) revert CalldataTooLarge();
         if (bondAmount < minBond) revert BondBelowMin();
@@ -182,7 +183,6 @@ contract CronBond is Ownable2Step, Pausable, ReentrancyGuard {
 
         if (job.status != JobStatus.Active) revert JobNotActive();
         if (block.timestamp < job.executeAt) revert NotYetExecutable();
-        if (gasleft() < uint256(job.maxGas) + EXECUTION_OVERHEAD) revert InsufficientGas();
 
         uint256 fee = (job.bondAmount * protocolFeeBps) / BPS_DENOMINATOR;
         uint256 payout = job.bondAmount - fee;
@@ -192,11 +192,14 @@ contract CronBond is Ownable2Step, Pausable, ReentrancyGuard {
         protocolFeesAccrued += fee;
         pendingWithdrawals[msg.sender] += payout;
 
-        // Cache before-call state we need locally
+        // Load calldata AFTER state writes so gas consumed here is accounted for
         address target = job.target;
         uint32 gasCap = job.maxGas;
         bytes memory data = job.callData;
         bytes32 cdHash = keccak256(data);
+
+        // Gas check immediately before the call, after all pre-call work
+        if (gasleft() < uint256(gasCap) + EXECUTION_OVERHEAD) revert InsufficientGas();
 
         uint256 gasStart = gasleft();
         (bool success,) = target.call{gas: gasCap}(data);
@@ -253,6 +256,7 @@ contract CronBond is Ownable2Step, Pausable, ReentrancyGuard {
     {
         uint256 pct = (bondAmount * cancellationFeeBps) / BPS_DENOMINATOR;
         fee = pct >= cancellationFeeFloor ? pct : cancellationFeeFloor;
+        if (fee > bondAmount) fee = bondAmount;
         refund = bondAmount - fee;
     }
 
