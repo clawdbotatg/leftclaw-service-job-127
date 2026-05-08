@@ -1,85 +1,83 @@
-# 🏗 Scaffold-ETH 2
+# CronBond
 
-**Live URL:** https://bafybeie2hrgqdscsk5whxyfgoxlwkm5dpslgbdcmdas5ethhx73dn64vwe.ipfs.community.bgipfs.com/
+Permissionless bonded scheduled-execution registry on Base.
 
-<h4 align="center">
-  <a href="https://docs.scaffoldeth.io">Documentation</a> |
-  <a href="https://scaffoldeth.io">Website</a>
-</h4>
+**Live:** https://bafybeie2hrgqdscsk5whxyfgoxlwkm5dpslgbdcmdas5ethhx73dn64vwe.ipfs.community.bgipfs.com/
 
-🧪 An open-source, up-to-date toolkit for building decentralized applications (dapps) on the Ethereum blockchain. It's designed to make it easier for developers to create and deploy smart contracts and build user interfaces that interact with those contracts.
+## What It Does
 
-> [!NOTE]
-> 🤖 Scaffold-ETH 2 is AI-ready! It has everything agents need to build on Ethereum. Check `.agents/`, `.claude/`, `.opencode` or `.cursor/` for more info.
+CronBond lets anyone schedule a future contract call by bonding USDC. A keeper network executes the call at the scheduled time and earns the bond minus a small protocol fee. Use cases: vesting drips, treasury buybacks, subscription billing, auction settlement — built once, composed everywhere.
 
-⚙️ Built using NextJS, RainbowKit, Foundry, Wagmi, Viem, and Typescript.
+## Contracts
 
-- ✅ **Contract Hot Reload**: Your frontend auto-adapts to your smart contract as you edit it.
-- 🪝 **[Custom hooks](https://docs.scaffoldeth.io/hooks/)**: Collection of React hooks wrapper around [wagmi](https://wagmi.sh/) to simplify interactions with smart contracts with typescript autocompletion.
-- 🧱 [**Components**](https://docs.scaffoldeth.io/components/): Collection of common web3 components to quickly build your frontend.
-- 🔥 **Burner Wallet & Local Faucet**: Quickly test your application with a burner wallet and local faucet.
-- 🔐 **Integration with Wallet Providers**: Connect to different wallet providers and interact with the Ethereum network.
+| Contract | Address | Chain |
+|---|---|---|
+| CronBond | [`0x13F4a48577899cd395bAc452a56bC3F8C9104383`](https://basescan.org/address/0x13F4a48577899cd395bAc452a56bC3F8C9104383) | Base |
 
-![Debug Contracts tab](https://github.com/scaffold-eth/scaffold-eth-2/assets/55535804/b237af0c-5027-4849-a5c1-2e31495cccb1)
+- **USDC:** `0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913` (Base)
+- **PROTOCOL_FEE_RECEIVER / Owner:** `0x8E9a2fa876CD2626F1CA2676132Fe638DE4ac3F1` (Safe on Base)
+- **Verified on Basescan:** ✅
 
-## Requirements
+## Frontend Pages
 
-Before you begin, you need to install the following tools:
+| Page | Description |
+|---|---|
+| `/` | My Jobs — your registered jobs with cancel / reclaim actions |
+| `/create` | Create Job — schedule a future call with USDC bond |
+| `/keepers` | Keeper Queue — executable jobs sortable by bond size |
+| `/stats` | Stats — protocol totals, leaderboards, recent activity |
 
-- [Node (>= v20.18.3)](https://nodejs.org/en/download/)
-- Yarn ([v1](https://classic.yarnpkg.com/en/docs/install/) or [v2+](https://yarnpkg.com/getting-started/install))
-- [Git](https://git-scm.com/downloads)
+## Default Parameters
 
-## Quickstart
+| Parameter | Value |
+|---|---|
+| Min Bond | $1.00 USDC |
+| Protocol Fee | 0.10% |
+| Cancellation Fee | 5% (min $0.05) |
+| Stale Window | 7 days after executeAt |
+| Min Delay | 120 seconds |
+| Max Delay | ~5 years |
 
-To get started with Scaffold-ETH 2, follow the steps below:
+## Owner Actions Required
 
-1. Install dependencies if it was skipped in CLI:
+The owner is the Safe wallet `0x8E9a2fa876CD2626F1CA2676132Fe638DE4ac3F1`. Ownership uses Ownable2Step — **the Safe must call `acceptOwnership()` on the CronBond contract** to finalize ownership transfer. Until accepted, the deployer retains owner privileges.
 
-```
-cd my-dapp-example
+Owner can configure: `setMinBond`, `setProtocolFeeBps`, `setCancellationFeeBps`, `setCancellationFeeFloor`, `setStaleWindow`, `setMinDelay`, `setMaxDelay`, `pause`/`unpause`.
+
+`withdrawProtocolFees()` is permissionless and always sends to the immutable `PROTOCOL_FEE_RECEIVER`.
+
+## Development
+
+```bash
+# Install
 yarn install
+
+# Local development (fork Base)
+yarn fork --network base   # Terminal 1
+yarn deploy                # Terminal 2
+yarn start                 # Terminal 3
+
+# Tests (50 tests: unit + invariant + fuzz)
+cd packages/foundry && forge test -vv
+
+# Build for IPFS
+cd packages/nextjs
+NODE_OPTIONS="--require ./polyfill-localstorage.cjs" \
+  NEXT_PUBLIC_IPFS_BUILD=true \
+  yarn build
 ```
 
-2. Run a local network in the first terminal:
+## Architecture
 
-```
-yarn chain
-```
+Single contract: `packages/foundry/contracts/CronBond.sol`
 
-This command starts a local Ethereum network using Foundry. The network runs on your local machine and can be used for testing and development. You can customize the network configuration in `packages/foundry/foundry.toml`.
+- `register(target, callData, executeAt, bondAmount, maxGas)` — bonds USDC, creates a job
+- `execute(jobId)` — callable after executeAt; keeper earns bond minus fee (pull pattern)
+- `cancel(jobId)` — registrant cancels before the lock window; partial refund
+- `reclaimStale(jobId)` — registrant reclaims 7 days after executeAt if nobody executed
+- `withdraw()` — pull USDC from pendingWithdrawals
+- `withdrawProtocolFees()` — permissionless fee sweep to immutable receiver
 
-3. On a second terminal, deploy the test contract:
+## GitHub
 
-```
-yarn deploy
-```
-
-This command deploys a test smart contract to the local network. The contract is located in `packages/foundry/contracts` and can be modified to suit your needs. The `yarn deploy` command uses the deploy script located in `packages/foundry/script` to deploy the contract to the network. You can also customize the deploy script.
-
-4. On a third terminal, start your NextJS app:
-
-```
-yarn start
-```
-
-Visit your app on: `http://localhost:3000`. You can interact with your smart contract using the `Debug Contracts` page. You can tweak the app config in `packages/nextjs/scaffold.config.ts`.
-
-Run smart contract test with `yarn foundry:test`
-
-- Edit your smart contracts in `packages/foundry/contracts`
-- Edit your frontend homepage at `packages/nextjs/app/page.tsx`. For guidance on [routing](https://nextjs.org/docs/app/building-your-application/routing/defining-routes) and configuring [pages/layouts](https://nextjs.org/docs/app/building-your-application/routing/pages-and-layouts) checkout the Next.js documentation.
-- Edit your deployment scripts in `packages/foundry/script`
-
-
-## Documentation
-
-Visit our [docs](https://docs.scaffoldeth.io) to learn how to start building with Scaffold-ETH 2.
-
-To know more about its features, check out our [website](https://scaffoldeth.io).
-
-## Contributing to Scaffold-ETH 2
-
-We welcome contributions to Scaffold-ETH 2!
-
-Please see [CONTRIBUTING.MD](https://github.com/scaffold-eth/scaffold-eth-2/blob/main/CONTRIBUTING.md) for more information and guidelines for contributing to Scaffold-ETH 2.
+https://github.com/clawdbotatg/leftclaw-service-job-127
