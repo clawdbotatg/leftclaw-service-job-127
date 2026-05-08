@@ -7,14 +7,26 @@ import { GenericContractsDeclaration } from "~~/utils/scaffold-eth/contract";
 const deployedContracts = {
   8453: {
     CronBond: {
-      address: "0x0000000000000000000000000000000000000000",
+      address: "0x13f4a48577899cd395bac452a56bc3f8c9104383",
       abi: [
         {
           type: "constructor",
           inputs: [
-            { name: "usdc", type: "address", internalType: "address" },
-            { name: "feeReceiver", type: "address", internalType: "address" },
-            { name: "initialOwner", type: "address", internalType: "address" },
+            {
+              name: "usdc",
+              type: "address",
+              internalType: "address",
+            },
+            {
+              name: "feeReceiver",
+              type: "address",
+              internalType: "address",
+            },
+            {
+              name: "initialOwner",
+              type: "address",
+              internalType: "address",
+            },
           ],
           stateMutability: "nonpayable",
         },
@@ -22,56 +34,104 @@ const deployedContracts = {
           type: "function",
           name: "BPS_DENOMINATOR",
           inputs: [],
-          outputs: [{ name: "", type: "uint256", internalType: "uint256" }],
+          outputs: [
+            {
+              name: "",
+              type: "uint256",
+              internalType: "uint256",
+            },
+          ],
           stateMutability: "view",
         },
         {
           type: "function",
           name: "CANCEL_LOCK_WINDOW",
           inputs: [],
-          outputs: [{ name: "", type: "uint64", internalType: "uint64" }],
+          outputs: [
+            {
+              name: "",
+              type: "uint64",
+              internalType: "uint64",
+            },
+          ],
           stateMutability: "view",
         },
         {
           type: "function",
           name: "EXECUTION_OVERHEAD",
           inputs: [],
-          outputs: [{ name: "", type: "uint256", internalType: "uint256" }],
+          outputs: [
+            {
+              name: "",
+              type: "uint256",
+              internalType: "uint256",
+            },
+          ],
           stateMutability: "view",
         },
         {
           type: "function",
           name: "MAX_CALLDATA_SIZE",
           inputs: [],
-          outputs: [{ name: "", type: "uint256", internalType: "uint256" }],
+          outputs: [
+            {
+              name: "",
+              type: "uint256",
+              internalType: "uint256",
+            },
+          ],
           stateMutability: "view",
         },
         {
           type: "function",
           name: "MAX_GAS_CEILING",
           inputs: [],
-          outputs: [{ name: "", type: "uint32", internalType: "uint32" }],
+          outputs: [
+            {
+              name: "",
+              type: "uint32",
+              internalType: "uint32",
+            },
+          ],
           stateMutability: "view",
         },
         {
           type: "function",
           name: "MAX_GAS_FLOOR",
           inputs: [],
-          outputs: [{ name: "", type: "uint32", internalType: "uint32" }],
+          outputs: [
+            {
+              name: "",
+              type: "uint32",
+              internalType: "uint32",
+            },
+          ],
           stateMutability: "view",
         },
         {
           type: "function",
           name: "PROTOCOL_FEE_RECEIVER",
           inputs: [],
-          outputs: [{ name: "", type: "address", internalType: "address" }],
+          outputs: [
+            {
+              name: "",
+              type: "address",
+              internalType: "address",
+            },
+          ],
           stateMutability: "view",
         },
         {
           type: "function",
           name: "USDC",
           inputs: [],
-          outputs: [{ name: "", type: "address", internalType: "contract IERC20" }],
+          outputs: [
+            {
+              name: "",
+              type: "address",
+              internalType: "contract IERC20",
+            },
+          ],
           stateMutability: "view",
         },
         {
@@ -84,7 +144,13 @@ const deployedContracts = {
         {
           type: "function",
           name: "cancel",
-          inputs: [{ name: "jobId", type: "uint256", internalType: "uint256" }],
+          inputs: [
+            {
+              name: "jobId",
+              type: "uint256",
+              internalType: "uint256",
+            },
+          ],
           outputs: [],
           stateMutability: "nonpayable",
         },
@@ -92,36 +158,98 @@ const deployedContracts = {
           type: "function",
           name: "cancellationFeeBps",
           inputs: [],
-          outputs: [{ name: "", type: "uint256", internalType: "uint256" }],
+          outputs: [
+            {
+              name: "",
+              type: "uint256",
+              internalType: "uint256",
+            },
+          ],
           stateMutability: "view",
         },
         {
           type: "function",
           name: "cancellationFeeFloor",
           inputs: [],
-          outputs: [{ name: "", type: "uint256", internalType: "uint256" }],
+          outputs: [
+            {
+              name: "",
+              type: "uint256",
+              internalType: "uint256",
+            },
+          ],
           stateMutability: "view",
         },
         {
           type: "function",
           name: "execute",
-          inputs: [{ name: "jobId", type: "uint256", internalType: "uint256" }],
-          outputs: [{ name: "", type: "bool", internalType: "bool" }],
+          inputs: [
+            {
+              name: "jobId",
+              type: "uint256",
+              internalType: "uint256",
+            },
+          ],
+          outputs: [
+            {
+              name: "",
+              type: "bool",
+              internalType: "bool",
+            },
+          ],
           stateMutability: "nonpayable",
         },
         {
           type: "function",
           name: "jobs",
-          inputs: [{ name: "", type: "uint256", internalType: "uint256" }],
+          inputs: [
+            {
+              name: "",
+              type: "uint256",
+              internalType: "uint256",
+            },
+          ],
           outputs: [
-            { name: "registrant", type: "address", internalType: "address" },
-            { name: "executeAt", type: "uint64", internalType: "uint64" },
-            { name: "maxGas", type: "uint32", internalType: "uint32" },
-            { name: "target", type: "address", internalType: "address" },
-            { name: "status", type: "uint8", internalType: "enum CronBond.JobStatus" },
-            { name: "bondAmount", type: "uint256", internalType: "uint256" },
-            { name: "callData", type: "bytes", internalType: "bytes" },
-            { name: "extraData", type: "bytes", internalType: "bytes" },
+            {
+              name: "registrant",
+              type: "address",
+              internalType: "address",
+            },
+            {
+              name: "executeAt",
+              type: "uint64",
+              internalType: "uint64",
+            },
+            {
+              name: "maxGas",
+              type: "uint32",
+              internalType: "uint32",
+            },
+            {
+              name: "target",
+              type: "address",
+              internalType: "address",
+            },
+            {
+              name: "status",
+              type: "uint8",
+              internalType: "enum CronBond.JobStatus",
+            },
+            {
+              name: "bondAmount",
+              type: "uint256",
+              internalType: "uint256",
+            },
+            {
+              name: "callData",
+              type: "bytes",
+              internalType: "bytes",
+            },
+            {
+              name: "extraData",
+              type: "bytes",
+              internalType: "bytes",
+            },
           ],
           stateMutability: "view",
         },
@@ -129,35 +257,65 @@ const deployedContracts = {
           type: "function",
           name: "maxDelay",
           inputs: [],
-          outputs: [{ name: "", type: "uint64", internalType: "uint64" }],
+          outputs: [
+            {
+              name: "",
+              type: "uint64",
+              internalType: "uint64",
+            },
+          ],
           stateMutability: "view",
         },
         {
           type: "function",
           name: "minBond",
           inputs: [],
-          outputs: [{ name: "", type: "uint256", internalType: "uint256" }],
+          outputs: [
+            {
+              name: "",
+              type: "uint256",
+              internalType: "uint256",
+            },
+          ],
           stateMutability: "view",
         },
         {
           type: "function",
           name: "minDelay",
           inputs: [],
-          outputs: [{ name: "", type: "uint64", internalType: "uint64" }],
+          outputs: [
+            {
+              name: "",
+              type: "uint64",
+              internalType: "uint64",
+            },
+          ],
           stateMutability: "view",
         },
         {
           type: "function",
           name: "nextJobId",
           inputs: [],
-          outputs: [{ name: "", type: "uint256", internalType: "uint256" }],
+          outputs: [
+            {
+              name: "",
+              type: "uint256",
+              internalType: "uint256",
+            },
+          ],
           stateMutability: "view",
         },
         {
           type: "function",
           name: "owner",
           inputs: [],
-          outputs: [{ name: "", type: "address", internalType: "address" }],
+          outputs: [
+            {
+              name: "",
+              type: "address",
+              internalType: "address",
+            },
+          ],
           stateMutability: "view",
         },
         {
@@ -171,41 +329,83 @@ const deployedContracts = {
           type: "function",
           name: "paused",
           inputs: [],
-          outputs: [{ name: "", type: "bool", internalType: "bool" }],
+          outputs: [
+            {
+              name: "",
+              type: "bool",
+              internalType: "bool",
+            },
+          ],
           stateMutability: "view",
         },
         {
           type: "function",
           name: "pendingOwner",
           inputs: [],
-          outputs: [{ name: "", type: "address", internalType: "address" }],
+          outputs: [
+            {
+              name: "",
+              type: "address",
+              internalType: "address",
+            },
+          ],
           stateMutability: "view",
         },
         {
           type: "function",
           name: "pendingWithdrawals",
-          inputs: [{ name: "", type: "address", internalType: "address" }],
-          outputs: [{ name: "", type: "uint256", internalType: "uint256" }],
+          inputs: [
+            {
+              name: "",
+              type: "address",
+              internalType: "address",
+            },
+          ],
+          outputs: [
+            {
+              name: "",
+              type: "uint256",
+              internalType: "uint256",
+            },
+          ],
           stateMutability: "view",
         },
         {
           type: "function",
           name: "protocolFeeBps",
           inputs: [],
-          outputs: [{ name: "", type: "uint256", internalType: "uint256" }],
+          outputs: [
+            {
+              name: "",
+              type: "uint256",
+              internalType: "uint256",
+            },
+          ],
           stateMutability: "view",
         },
         {
           type: "function",
           name: "protocolFeesAccrued",
           inputs: [],
-          outputs: [{ name: "", type: "uint256", internalType: "uint256" }],
+          outputs: [
+            {
+              name: "",
+              type: "uint256",
+              internalType: "uint256",
+            },
+          ],
           stateMutability: "view",
         },
         {
           type: "function",
           name: "reclaimStale",
-          inputs: [{ name: "jobId", type: "uint256", internalType: "uint256" }],
+          inputs: [
+            {
+              name: "jobId",
+              type: "uint256",
+              internalType: "uint256",
+            },
+          ],
           outputs: [],
           stateMutability: "nonpayable",
         },
@@ -213,13 +413,39 @@ const deployedContracts = {
           type: "function",
           name: "register",
           inputs: [
-            { name: "target", type: "address", internalType: "address" },
-            { name: "callData", type: "bytes", internalType: "bytes" },
-            { name: "executeAt", type: "uint64", internalType: "uint64" },
-            { name: "bondAmount", type: "uint256", internalType: "uint256" },
-            { name: "maxGas", type: "uint32", internalType: "uint32" },
+            {
+              name: "target",
+              type: "address",
+              internalType: "address",
+            },
+            {
+              name: "callData",
+              type: "bytes",
+              internalType: "bytes",
+            },
+            {
+              name: "executeAt",
+              type: "uint64",
+              internalType: "uint64",
+            },
+            {
+              name: "bondAmount",
+              type: "uint256",
+              internalType: "uint256",
+            },
+            {
+              name: "maxGas",
+              type: "uint32",
+              internalType: "uint32",
+            },
           ],
-          outputs: [{ name: "", type: "uint256", internalType: "uint256" }],
+          outputs: [
+            {
+              name: "",
+              type: "uint256",
+              internalType: "uint256",
+            },
+          ],
           stateMutability: "nonpayable",
         },
         {
@@ -232,49 +458,91 @@ const deployedContracts = {
         {
           type: "function",
           name: "setCancellationFeeBps",
-          inputs: [{ name: "newBps", type: "uint256", internalType: "uint256" }],
+          inputs: [
+            {
+              name: "newBps",
+              type: "uint256",
+              internalType: "uint256",
+            },
+          ],
           outputs: [],
           stateMutability: "nonpayable",
         },
         {
           type: "function",
           name: "setCancellationFeeFloor",
-          inputs: [{ name: "newFloor", type: "uint256", internalType: "uint256" }],
+          inputs: [
+            {
+              name: "newFloor",
+              type: "uint256",
+              internalType: "uint256",
+            },
+          ],
           outputs: [],
           stateMutability: "nonpayable",
         },
         {
           type: "function",
           name: "setMaxDelay",
-          inputs: [{ name: "newDelay", type: "uint64", internalType: "uint64" }],
+          inputs: [
+            {
+              name: "newDelay",
+              type: "uint64",
+              internalType: "uint64",
+            },
+          ],
           outputs: [],
           stateMutability: "nonpayable",
         },
         {
           type: "function",
           name: "setMinBond",
-          inputs: [{ name: "newMinBond", type: "uint256", internalType: "uint256" }],
+          inputs: [
+            {
+              name: "newMinBond",
+              type: "uint256",
+              internalType: "uint256",
+            },
+          ],
           outputs: [],
           stateMutability: "nonpayable",
         },
         {
           type: "function",
           name: "setMinDelay",
-          inputs: [{ name: "newDelay", type: "uint64", internalType: "uint64" }],
+          inputs: [
+            {
+              name: "newDelay",
+              type: "uint64",
+              internalType: "uint64",
+            },
+          ],
           outputs: [],
           stateMutability: "nonpayable",
         },
         {
           type: "function",
           name: "setProtocolFeeBps",
-          inputs: [{ name: "newBps", type: "uint256", internalType: "uint256" }],
+          inputs: [
+            {
+              name: "newBps",
+              type: "uint256",
+              internalType: "uint256",
+            },
+          ],
           outputs: [],
           stateMutability: "nonpayable",
         },
         {
           type: "function",
           name: "setStaleWindow",
-          inputs: [{ name: "newWindow", type: "uint256", internalType: "uint256" }],
+          inputs: [
+            {
+              name: "newWindow",
+              type: "uint256",
+              internalType: "uint256",
+            },
+          ],
           outputs: [],
           stateMutability: "nonpayable",
         },
@@ -282,13 +550,25 @@ const deployedContracts = {
           type: "function",
           name: "staleWindow",
           inputs: [],
-          outputs: [{ name: "", type: "uint256", internalType: "uint256" }],
+          outputs: [
+            {
+              name: "",
+              type: "uint256",
+              internalType: "uint256",
+            },
+          ],
           stateMutability: "view",
         },
         {
           type: "function",
           name: "transferOwnership",
-          inputs: [{ name: "newOwner", type: "address", internalType: "address" }],
+          inputs: [
+            {
+              name: "newOwner",
+              type: "address",
+              internalType: "address",
+            },
+          ],
           outputs: [],
           stateMutability: "nonpayable",
         },
@@ -315,116 +595,20 @@ const deployedContracts = {
         },
         {
           type: "event",
-          name: "JobCancelled",
-          inputs: [
-            { name: "jobId", type: "uint256", indexed: true, internalType: "uint256" },
-            { name: "registrant", type: "address", indexed: true, internalType: "address" },
-            { name: "refunded", type: "uint256", indexed: false, internalType: "uint256" },
-            { name: "cancellationFee", type: "uint256", indexed: false, internalType: "uint256" },
-          ],
-          anonymous: false,
-        },
-        {
-          type: "event",
-          name: "JobExecuted",
-          inputs: [
-            { name: "jobId", type: "uint256", indexed: true, internalType: "uint256" },
-            { name: "keeper", type: "address", indexed: true, internalType: "address" },
-            { name: "success", type: "bool", indexed: false, internalType: "bool" },
-            { name: "calldataHash", type: "bytes32", indexed: false, internalType: "bytes32" },
-            { name: "keeperPayout", type: "uint256", indexed: false, internalType: "uint256" },
-            { name: "gasUsed", type: "uint64", indexed: false, internalType: "uint64" },
-          ],
-          anonymous: false,
-        },
-        {
-          type: "event",
-          name: "JobReclaimedStale",
-          inputs: [
-            { name: "jobId", type: "uint256", indexed: true, internalType: "uint256" },
-            { name: "registrant", type: "address", indexed: true, internalType: "address" },
-            { name: "refunded", type: "uint256", indexed: false, internalType: "uint256" },
-            { name: "fee", type: "uint256", indexed: false, internalType: "uint256" },
-          ],
-          anonymous: false,
-        },
-        {
-          type: "event",
-          name: "JobRegistered",
-          inputs: [
-            { name: "jobId", type: "uint256", indexed: true, internalType: "uint256" },
-            { name: "registrant", type: "address", indexed: true, internalType: "address" },
-            { name: "target", type: "address", indexed: true, internalType: "address" },
-            { name: "executeAt", type: "uint64", indexed: false, internalType: "uint64" },
-            { name: "bondAmount", type: "uint256", indexed: false, internalType: "uint256" },
-            { name: "maxGas", type: "uint32", indexed: false, internalType: "uint32" },
-            { name: "calldataHash", type: "bytes32", indexed: false, internalType: "bytes32" },
-          ],
-          anonymous: false,
-        },
-        {
-          type: "event",
-          name: "ProtocolFeeWithdrawn",
-          inputs: [
-            { name: "to", type: "address", indexed: true, internalType: "address" },
-            { name: "amount", type: "uint256", indexed: false, internalType: "uint256" },
-          ],
-          anonymous: false,
-        },
-        {
-          type: "event",
-          name: "OwnershipTransferStarted",
-          inputs: [
-            { name: "previousOwner", type: "address", indexed: true, internalType: "address" },
-            { name: "newOwner", type: "address", indexed: true, internalType: "address" },
-          ],
-          anonymous: false,
-        },
-        {
-          type: "event",
-          name: "OwnershipTransferred",
-          inputs: [
-            { name: "previousOwner", type: "address", indexed: true, internalType: "address" },
-            { name: "newOwner", type: "address", indexed: true, internalType: "address" },
-          ],
-          anonymous: false,
-        },
-        {
-          type: "event",
-          name: "Paused",
-          inputs: [{ name: "account", type: "address", indexed: false, internalType: "address" }],
-          anonymous: false,
-        },
-        {
-          type: "event",
-          name: "Unpaused",
-          inputs: [{ name: "account", type: "address", indexed: false, internalType: "address" }],
-          anonymous: false,
-        },
-        {
-          type: "event",
-          name: "MinBondUpdated",
-          inputs: [
-            { name: "oldValue", type: "uint256", indexed: false, internalType: "uint256" },
-            { name: "newValue", type: "uint256", indexed: false, internalType: "uint256" },
-          ],
-          anonymous: false,
-        },
-        {
-          type: "event",
-          name: "ProtocolFeeBpsUpdated",
-          inputs: [
-            { name: "oldValue", type: "uint256", indexed: false, internalType: "uint256" },
-            { name: "newValue", type: "uint256", indexed: false, internalType: "uint256" },
-          ],
-          anonymous: false,
-        },
-        {
-          type: "event",
           name: "CancellationFeeBpsUpdated",
           inputs: [
-            { name: "oldValue", type: "uint256", indexed: false, internalType: "uint256" },
-            { name: "newValue", type: "uint256", indexed: false, internalType: "uint256" },
+            {
+              name: "oldValue",
+              type: "uint256",
+              indexed: false,
+              internalType: "uint256",
+            },
+            {
+              name: "newValue",
+              type: "uint256",
+              indexed: false,
+              internalType: "uint256",
+            },
           ],
           anonymous: false,
         },
@@ -432,26 +616,172 @@ const deployedContracts = {
           type: "event",
           name: "CancellationFeeFloorUpdated",
           inputs: [
-            { name: "oldValue", type: "uint256", indexed: false, internalType: "uint256" },
-            { name: "newValue", type: "uint256", indexed: false, internalType: "uint256" },
+            {
+              name: "oldValue",
+              type: "uint256",
+              indexed: false,
+              internalType: "uint256",
+            },
+            {
+              name: "newValue",
+              type: "uint256",
+              indexed: false,
+              internalType: "uint256",
+            },
           ],
           anonymous: false,
         },
         {
           type: "event",
-          name: "StaleWindowUpdated",
+          name: "JobCancelled",
           inputs: [
-            { name: "oldValue", type: "uint256", indexed: false, internalType: "uint256" },
-            { name: "newValue", type: "uint256", indexed: false, internalType: "uint256" },
+            {
+              name: "jobId",
+              type: "uint256",
+              indexed: true,
+              internalType: "uint256",
+            },
+            {
+              name: "registrant",
+              type: "address",
+              indexed: true,
+              internalType: "address",
+            },
+            {
+              name: "refunded",
+              type: "uint256",
+              indexed: false,
+              internalType: "uint256",
+            },
+            {
+              name: "cancellationFee",
+              type: "uint256",
+              indexed: false,
+              internalType: "uint256",
+            },
           ],
           anonymous: false,
         },
         {
           type: "event",
-          name: "MinDelayUpdated",
+          name: "JobExecuted",
           inputs: [
-            { name: "oldValue", type: "uint64", indexed: false, internalType: "uint64" },
-            { name: "newValue", type: "uint64", indexed: false, internalType: "uint64" },
+            {
+              name: "jobId",
+              type: "uint256",
+              indexed: true,
+              internalType: "uint256",
+            },
+            {
+              name: "keeper",
+              type: "address",
+              indexed: true,
+              internalType: "address",
+            },
+            {
+              name: "success",
+              type: "bool",
+              indexed: false,
+              internalType: "bool",
+            },
+            {
+              name: "calldataHash",
+              type: "bytes32",
+              indexed: false,
+              internalType: "bytes32",
+            },
+            {
+              name: "keeperPayout",
+              type: "uint256",
+              indexed: false,
+              internalType: "uint256",
+            },
+            {
+              name: "gasUsed",
+              type: "uint64",
+              indexed: false,
+              internalType: "uint64",
+            },
+          ],
+          anonymous: false,
+        },
+        {
+          type: "event",
+          name: "JobReclaimedStale",
+          inputs: [
+            {
+              name: "jobId",
+              type: "uint256",
+              indexed: true,
+              internalType: "uint256",
+            },
+            {
+              name: "registrant",
+              type: "address",
+              indexed: true,
+              internalType: "address",
+            },
+            {
+              name: "refunded",
+              type: "uint256",
+              indexed: false,
+              internalType: "uint256",
+            },
+            {
+              name: "fee",
+              type: "uint256",
+              indexed: false,
+              internalType: "uint256",
+            },
+          ],
+          anonymous: false,
+        },
+        {
+          type: "event",
+          name: "JobRegistered",
+          inputs: [
+            {
+              name: "jobId",
+              type: "uint256",
+              indexed: true,
+              internalType: "uint256",
+            },
+            {
+              name: "registrant",
+              type: "address",
+              indexed: true,
+              internalType: "address",
+            },
+            {
+              name: "target",
+              type: "address",
+              indexed: true,
+              internalType: "address",
+            },
+            {
+              name: "executeAt",
+              type: "uint64",
+              indexed: false,
+              internalType: "uint64",
+            },
+            {
+              name: "bondAmount",
+              type: "uint256",
+              indexed: false,
+              internalType: "uint256",
+            },
+            {
+              name: "maxGas",
+              type: "uint32",
+              indexed: false,
+              internalType: "uint32",
+            },
+            {
+              name: "calldataHash",
+              type: "bytes32",
+              indexed: false,
+              internalType: "bytes32",
+            },
           ],
           anonymous: false,
         },
@@ -459,13 +789,311 @@ const deployedContracts = {
           type: "event",
           name: "MaxDelayUpdated",
           inputs: [
-            { name: "oldValue", type: "uint64", indexed: false, internalType: "uint64" },
-            { name: "newValue", type: "uint64", indexed: false, internalType: "uint64" },
+            {
+              name: "oldValue",
+              type: "uint64",
+              indexed: false,
+              internalType: "uint64",
+            },
+            {
+              name: "newValue",
+              type: "uint64",
+              indexed: false,
+              internalType: "uint64",
+            },
           ],
           anonymous: false,
         },
+        {
+          type: "event",
+          name: "MinBondUpdated",
+          inputs: [
+            {
+              name: "oldValue",
+              type: "uint256",
+              indexed: false,
+              internalType: "uint256",
+            },
+            {
+              name: "newValue",
+              type: "uint256",
+              indexed: false,
+              internalType: "uint256",
+            },
+          ],
+          anonymous: false,
+        },
+        {
+          type: "event",
+          name: "MinDelayUpdated",
+          inputs: [
+            {
+              name: "oldValue",
+              type: "uint64",
+              indexed: false,
+              internalType: "uint64",
+            },
+            {
+              name: "newValue",
+              type: "uint64",
+              indexed: false,
+              internalType: "uint64",
+            },
+          ],
+          anonymous: false,
+        },
+        {
+          type: "event",
+          name: "OwnershipTransferStarted",
+          inputs: [
+            {
+              name: "previousOwner",
+              type: "address",
+              indexed: true,
+              internalType: "address",
+            },
+            {
+              name: "newOwner",
+              type: "address",
+              indexed: true,
+              internalType: "address",
+            },
+          ],
+          anonymous: false,
+        },
+        {
+          type: "event",
+          name: "OwnershipTransferred",
+          inputs: [
+            {
+              name: "previousOwner",
+              type: "address",
+              indexed: true,
+              internalType: "address",
+            },
+            {
+              name: "newOwner",
+              type: "address",
+              indexed: true,
+              internalType: "address",
+            },
+          ],
+          anonymous: false,
+        },
+        {
+          type: "event",
+          name: "Paused",
+          inputs: [
+            {
+              name: "account",
+              type: "address",
+              indexed: false,
+              internalType: "address",
+            },
+          ],
+          anonymous: false,
+        },
+        {
+          type: "event",
+          name: "ProtocolFeeBpsUpdated",
+          inputs: [
+            {
+              name: "oldValue",
+              type: "uint256",
+              indexed: false,
+              internalType: "uint256",
+            },
+            {
+              name: "newValue",
+              type: "uint256",
+              indexed: false,
+              internalType: "uint256",
+            },
+          ],
+          anonymous: false,
+        },
+        {
+          type: "event",
+          name: "ProtocolFeeWithdrawn",
+          inputs: [
+            {
+              name: "to",
+              type: "address",
+              indexed: true,
+              internalType: "address",
+            },
+            {
+              name: "amount",
+              type: "uint256",
+              indexed: false,
+              internalType: "uint256",
+            },
+          ],
+          anonymous: false,
+        },
+        {
+          type: "event",
+          name: "StaleWindowUpdated",
+          inputs: [
+            {
+              name: "oldValue",
+              type: "uint256",
+              indexed: false,
+              internalType: "uint256",
+            },
+            {
+              name: "newValue",
+              type: "uint256",
+              indexed: false,
+              internalType: "uint256",
+            },
+          ],
+          anonymous: false,
+        },
+        {
+          type: "event",
+          name: "Unpaused",
+          inputs: [
+            {
+              name: "account",
+              type: "address",
+              indexed: false,
+              internalType: "address",
+            },
+          ],
+          anonymous: false,
+        },
+        {
+          type: "error",
+          name: "BannedTarget",
+          inputs: [],
+        },
+        {
+          type: "error",
+          name: "BondBelowMin",
+          inputs: [],
+        },
+        {
+          type: "error",
+          name: "CalldataTooLarge",
+          inputs: [],
+        },
+        {
+          type: "error",
+          name: "CancelWindowClosed",
+          inputs: [],
+        },
+        {
+          type: "error",
+          name: "EnforcedPause",
+          inputs: [],
+        },
+        {
+          type: "error",
+          name: "ExecuteAtTooFar",
+          inputs: [],
+        },
+        {
+          type: "error",
+          name: "ExecuteAtTooSoon",
+          inputs: [],
+        },
+        {
+          type: "error",
+          name: "ExpectedPause",
+          inputs: [],
+        },
+        {
+          type: "error",
+          name: "InsufficientGas",
+          inputs: [],
+        },
+        {
+          type: "error",
+          name: "InvariantViolation",
+          inputs: [],
+        },
+        {
+          type: "error",
+          name: "JobNotActive",
+          inputs: [],
+        },
+        {
+          type: "error",
+          name: "MaxGasOutOfRange",
+          inputs: [],
+        },
+        {
+          type: "error",
+          name: "NotRegistrant",
+          inputs: [],
+        },
+        {
+          type: "error",
+          name: "NotStaleYet",
+          inputs: [],
+        },
+        {
+          type: "error",
+          name: "NotYetExecutable",
+          inputs: [],
+        },
+        {
+          type: "error",
+          name: "NothingToWithdraw",
+          inputs: [],
+        },
+        {
+          type: "error",
+          name: "OwnableInvalidOwner",
+          inputs: [
+            {
+              name: "owner",
+              type: "address",
+              internalType: "address",
+            },
+          ],
+        },
+        {
+          type: "error",
+          name: "OwnableUnauthorizedAccount",
+          inputs: [
+            {
+              name: "account",
+              type: "address",
+              internalType: "address",
+            },
+          ],
+        },
+        {
+          type: "error",
+          name: "ParamOutOfRange",
+          inputs: [],
+        },
+        {
+          type: "error",
+          name: "ReentrancyGuardReentrantCall",
+          inputs: [],
+        },
+        {
+          type: "error",
+          name: "SafeERC20FailedOperation",
+          inputs: [
+            {
+              name: "token",
+              type: "address",
+              internalType: "address",
+            },
+          ],
+        },
+        {
+          type: "error",
+          name: "ZeroTarget",
+          inputs: [],
+        },
       ],
       inheritedFunctions: {},
+      deployedOnBlock: 45734512,
     },
   },
 } as const;
