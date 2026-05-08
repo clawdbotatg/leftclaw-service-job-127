@@ -49,7 +49,9 @@ export const ScaffoldEthAppWithProviders = ({ children }: { children: React.Reac
   if (!mounted) {
     return (
       <div className="flex flex-col min-h-screen">
-        <main className="relative flex flex-col flex-1">{children}</main>
+        <main className="relative flex flex-col flex-1 items-center justify-center">
+          <span className="loading loading-spinner loading-lg" />
+        </main>
       </div>
     );
   }
